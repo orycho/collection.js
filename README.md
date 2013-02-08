@@ -4,9 +4,11 @@ collection.js
 Basic efficient data structures for JavaScript. Ory was shocked to discover
 these where completely missing in JavaScript, instead people resorted to
 hacks like dynamically adding object properties and removing them.
+So it was considered a good reason for implementing some of the data structures
+discussed at length at university.
 
-This includes Lists, Sets and Maps. Some similarities to the C++ STL classes of the
-same name exists (thougn the naming follows the Java convention, which has become
+This includes Lists, Sets and Maps, more to come. Some similarities to the C++ STL classes of the
+same name exists (though the naming follows the Java convention, which has become
 widespread).
 
 Since JavaScript allows no operator overloading and has no built in hash for all types
@@ -16,7 +18,12 @@ to callbacks that implement the comparison operation.
 All comparison callbacks have signature function(a,b), for example comparing numbers
 could be done using
 
-function(a,b) { return a<b; };
+> function(a,b) { return a<b; };
+
+Not it is important that the comparison function returns *false* on equality.
+Two values x and y are considered equal if both of these calls return false:
+> compare(x,y)
+> compare(y,x)
 
 List
 ====
@@ -76,7 +83,7 @@ SearchTree
 
 This is an internal Object used to implement Set and Map.
 It is an implementation of left-leaning red-black trees.
-See [Robert Sedgwick's Paper](http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf).
+See [Robert Sedgwick's Paper](http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf)
 for a description of the underlying algorithms.
 
 Both Set and Map are implemented using this Object, and the constructor
@@ -121,6 +128,10 @@ A Map is a data structure that contains values which are referenced by keys.
 It supports efficient insertion, removal and find (look-up) based on the
 keys. All these operations are of logarithmic complexity.
 
+Constructor
+-----------
+* Map(compare): create a new set object that uses compare for ordering the elements.
+
 Methods
 -------
 
@@ -129,5 +140,5 @@ Methods
 * remove(key): removes the value, if it exists.
 * minimum(): return the value with the smalles key in the set, according to compare.
 * maximum(): return the value with the largest key in the set, according to compare.
-* forEach(callback): apply the callback to every element, in the order imposed by compare. The values passed to the callback are objects with three elements: key, value and toString()
+* forEach(callback): apply the callback to every element, in the order imposed by compare. The values passed to the callback are objects with three elements: key, value and toString().
 * size(): return the number of elements in the map.
