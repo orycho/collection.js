@@ -85,7 +85,7 @@ List.prototype.forEach=function forEach(callback)
 	}
 };
 /// Returns the length of the list
-List.prototype.length=function length(callback)
+List.prototype.length=function length()
 {
 	var cur=this.head;
 	var i=0;
@@ -468,7 +468,7 @@ Set.prototype.maximum=function maximum()
 	return this.tree.maximum();
 };
 
-Set.prototype.forEach=function maximum(callback)
+Set.prototype.forEach=function forEach(callback)
 {
 	return this.tree.forEach(callback);
 };
